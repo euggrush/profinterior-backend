@@ -10,38 +10,36 @@ const {
   HttpCode
 } = require(`../constants`);
 
-const commentValidator = require(`../middlewares/comment-validator`);
-const articleExist = require(`../middlewares/article-exists`);
 
-module.exports = (app, articleService, commentService) => {
+module.exports = (app, pictureService) => {
 
-  app.use(`/articles`, route);
+  app.use(`/projects`, route);
 
-  route.get(`/comments`, async (req, res) => {
-    const comments = await commentService.findAll();
+  route.get(`/pictures`, async (req, res) => {
+    const pictures = await pictureService.findAll();
 
     res.status(HttpCode.OK)
-      .json(comments);
+      .json(pictures);
   });
 
-  route.get(`/:articleId/comments`, [articleExist(articleService)], async (req, res) => {
+  route.get(`/:projectId/pictures`, async (req, res) => {
     const {
-      articleId
+      projectId
     } = req.params;
 
-    const comments = await commentService.findOne(articleId);
+    const pictures = await pictureService.findOne(projectId);
 
     res.status(HttpCode.OK)
-      .json(comments);
+      .json(pictures);
 
   });
 
-  route.delete(`/:articleId/comments/:commentId`, [articleExist(articleService)], async (req, res) => {
+  route.delete(`/:projectId/pictures/:pictureId`, async (req, res) => {
     const {
-      articleId,
-      commentId
+      projectId,
+      pictureId
     } = req.params;
-    const deleted = await commentService.drop(articleId, commentId);
+    const deleted = await pictureService.drop(projectId, pictureId);
 
     if (!deleted) {
       return res.status(HttpCode.NOT_FOUND)
@@ -52,19 +50,19 @@ module.exports = (app, articleService, commentService) => {
       .json(deleted);
   });
 
-  route.post(`/:articleId/comments`, [articleExist(articleService), commentValidator], async (req, res) => {
+  route.post(`/:projectId/pictures`, async (req, res) => {
     const {
-      articleId
+      projectId
     } = req.params;
 
-    const comment = await commentService.create(articleId, req.body);
+    const picture = await pictureService.create(projectId, req.body);
 
-    if (!comment) {
+    if (!picture) {
       return res.status(HttpCode.BAD_REQUEST)
         .send(`Not created`);
     }
 
     return res.status(HttpCode.CREATED)
-      .json(comment);
+      .json(picture);
   });
 };

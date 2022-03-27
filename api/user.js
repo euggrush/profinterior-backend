@@ -8,9 +8,7 @@ const {
   HttpCode
 } = require(`../constants`);
 
-const userValidator = require(`../middlewares/user-validator`);
-
-const passwordUtils = require(`../lib/password`);
+// const passwordUtils = require(`../lib/password`);
 
 const route = new Router();
 
@@ -28,10 +26,10 @@ module.exports = (app, service) => {
       .json(users);
   });
 
-  route.post(`/`, userValidator(service), async (req, res) => {
+  route.post(`/`, async (req, res) => {
     const data = req.body;
 
-    data.password_hash = await passwordUtils.hash(data.password);
+    // data.password_hash = await passwordUtils.hash(data.password);
 
     const result = await service.create(data);
 
@@ -41,25 +39,25 @@ module.exports = (app, service) => {
       .json(result);
   });
 
-  route.post(`/auth`, async (req, res) => {
-    const {
-      email,
-      password
-    } = req.body;
-    const user = await service.findByEmail(email);
+  // route.post(`/auth`, async (req, res) => {
+  //   const {
+  //     email,
+  //     password
+  //   } = req.body;
+  //   const user = await service.findByEmail(email);
 
-    if (!user) {
-      res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.EMAIL);
-      return;
-    }
+  //   if (!user) {
+  //     res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.EMAIL);
+  //     return;
+  //   }
 
-    const passwordIsCorrect = await passwordUtils.compare(password, user.password_hash);
+  //   const passwordIsCorrect = await passwordUtils.compare(password, user.password_hash);
 
-    if (passwordIsCorrect) {
-      delete user.password_hash;
-      res.status(HttpCode.OK).json(user);
-    } else {
-      res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.PASSWORD);
-    }
-  });
+  //   if (passwordIsCorrect) {
+  //     delete user.password_hash;
+  //     res.status(HttpCode.OK).json(user);
+  //   } else {
+  //     res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.PASSWORD);
+  //   }
+  // });
 };

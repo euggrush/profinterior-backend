@@ -6,14 +6,14 @@ class PictureService {
     this._Picture = sequelize.models.Picture;
   }
 
-  async create(projectId, comment) {
+  async create(projectId, picture) {
     return await this._Picture.create({
       projectId,
-      ...comment
+      ...picture
     });
   }
 
-  async drop(userId, projectId, commentId) {
+  async drop(userId, projectId, pictureId) {
     const projectByUser = await this._Project.findOne({
       where: {
         id: projectId,
@@ -27,7 +27,7 @@ class PictureService {
 
     const deletedRows = await this._Picture.destroy({
       where: {
-        id: commentId
+        id: pictureId
       }
     });
 

@@ -7,80 +7,79 @@ const {
   HttpCode
 } = require(`../constants`);
 
-const articleValidator = require(`../middlewares/article-validator`);
 
 const route = new Router();
 
 
-module.exports = (app, articleService) => {
+module.exports = (app, projectService) => {
 
-  app.use(`/articles`, route);
+  app.use(`/projects`, route);
 
   route.get(`/`, async (req, res) => {
     const {limit, offset} = req.query;
-    let articles;
+    let projects;
     if (limit || offset) {
-      articles = await articleService.findPage(limit, offset);
+      projects = await projectService.findPage(limit, offset);
     } else {
-      articles = await articleService.findAll();
+      projects = await projectService.findAll();
     }
-    res.status(HttpCode.OK).json(articles);
+    res.status(HttpCode.OK).json(projects);
   });
 
 
-  route.get(`/:articleId`, async (req, res) => {
+  route.get(`/:projectId`, async (req, res) => {
     const {
-      articleId
+      projectId
     } = req.params;
-    const article = await articleService.findOne(articleId);
+    const project = await projectService.findOne(projectId);
 
-    if (!article) {
+    if (!project) {
       return res.status(HttpCode.NOT_FOUND)
-        .send(`Not found with ${articleId}`);
+        .send(`Not found with ${projectId}`);
     }
 
     return res.status(HttpCode.OK)
-      .json(article);
+      .json(project);
   });
 
   route.post(`/`, (req, res) => {
-    const article = articleService.create(req.body);
-    if (!article) {
+    const project = projectService.create(req.body);
+    if (!project) {
       return res.status(HttpCode.BAD_REQUEST)
         .send(`Not created`);
     }
 
     return res.status(HttpCode.CREATED)
-      .json(article);
+      .json(project);
   });
 
-  route.put(`/:articleId`, [articleValidator], (req, res) => {
+  route.put(`/:projectId`, (req, res) => {
     const {
-      articleId
+      projectId
     } = req.params;
 
-    const updated = articleService.update(articleId, req.body);
+    const updated = projectService.update(projectId, req.body);
 
     if (!updated) {
       return res.status(HttpCode.NOT_FOUND)
-        .send(`Not found with ${articleId}`);
+        .send(`Not found with ${projectId}`);
     }
     return res.status(HttpCode.OK)
       .send(updated);
   });
 
-  route.delete(`/:articleId`, (req, res) => {
+  route.delete(`/:projectId`, (req, res) => {
     const {
-      articleId
+      projectId
     } = req.params;
-    const article = articleService.drop(articleId);
+    const project = projectService.drop(projectId);
 
-    if (!article) {
+    if (!project) {
       return res.status(HttpCode.NOT_FOUND)
         .send(`Not found`);
     }
 
     return res.status(HttpCode.OK)
-      .json(article);
+      .json(project);
   });
 };

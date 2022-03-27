@@ -45,15 +45,15 @@ const define = (sequelize) => User.init({
 });
 
 const defineRelations = ({
-    Comment,
+    Picture,
     Project
 }) => {
     User.hasMany(Project, {
         as: Aliase.PROJECTS,
         foreignKey: `user_id`
     });
-    User.hasMany(Comment, {
-        as: Aliase.COMMENTS,
+    User.hasMany(Picture, {
+        as: Aliase.PICTURES,
         foreignKey: `user_id`
     });
 };

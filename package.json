@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config ./bin/www",
+    "start": "node -r dotenv/config server.js",
     "kill": "npx kill-port 3000"
   },
   "dependencies": {
@@ -19,5 +19,8 @@
     "morgan": "1.9.1",
     "pg": "8.7.3",
     "sequelize": "6.17.0"
+  },
+  "devDependencies": {
+    "pino": "7.9.2"
   }
 }

@@ -1,5 +1,3 @@
-/* eslint-disable new-cap */
-/* eslint-disable camelcase */
 "use strict";
 
 const {
@@ -19,7 +17,6 @@ const define = (sequelize) => Project.init({
     type: DataTypes.STRING(1000),
     allowNull: false
   },
-  pictures: DataTypes.STRING(1000)
 }, {
   createdAt: false,
   updatedAt: false,
@@ -29,12 +26,12 @@ const define = (sequelize) => Project.init({
 });
 
 const defineRelations = ({
-  Comment,
+  Picture,
   Category,
   User
 }) => {
-  Project.hasMany(Comment, {
-    as: Aliase.PICTURES,
+  Project.hasMany(Picture, {
+    as: Aliase.PHOTOS,
     foreignKey: `project_id`,
     onDelete: `cascade`
   });

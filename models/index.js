@@ -1,6 +1,6 @@
 "use strict";
 
-const PictureModel = require(`./comment`);
+const PictureModel = require(`./picture`);
 const ProjectModel = require(`./project`);
 const CategoryModel = require(`./category`);
 const UserModel = require(`./user`);

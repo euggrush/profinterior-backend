@@ -26,7 +26,7 @@ const defineRelations = ({
     User
 }) => {
     Picture.belongsTo(Project, {
-        foreignKey: `article_id`
+        foreignKey: `project_id`
     });
     Picture.belongsTo(User, {
         as: Aliase.USERS,
