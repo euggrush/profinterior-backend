@@ -12,10 +12,10 @@ const {
 
 const route = new Router();
 
-const ErrorAuthMessage = {
-  EMAIL: `Электронный адрес не существует`,
-  PASSWORD: `Неверный пароль`
-};
+// const ErrorAuthMessage = {
+//   EMAIL: `Электронный адрес не существует`,
+//   PASSWORD: `Неверный пароль`
+// };
 
 module.exports = (app, service) => {
   app.use(`/user`, route);

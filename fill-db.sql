@@ -17,14 +17,14 @@ INSERT INTO articles(title, announce, fullText, picture, user_id) VALUES
 ('Обзор новейшего смартфона', 'Рок-музыка всегда ассоциировалась с протестами. Так ли это на самом деле?   Помните, небольшое количество ежедневных упражнений лучше, чем один раз, но много.   Первая большая ёлка была установлена только в 1938 году.   Игры и программирование разные вещи. Не стоит идти в программисты, если вам нравятся только игры.', 'Он написал больше 30 хитов.   Из под его пера вышло 8 платиновых альбомов.   Это один из лучших рок-музыкантов.   Простые ежедневные упражнения помогут достичь успеха.', 'image5.jpg', 1);
 ALTER TABLE articles ENABLE TRIGGER ALL;
 
-ALTER TABLE article_categories DISABLE TRIGGER ALL;
-INSERT INTO article_categories(article_id, category_id) VALUES
+ALTER TABLE project_categories DISABLE TRIGGER ALL;
+INSERT INTO project_categories(project_id, category_id) VALUES
 (1, 1),
 (2, 2),
 (3, 2),
 (4, 4),
 (5, 3);
-ALTER TABLE article_categories ENABLE TRIGGER ALL;
+ALTER TABLE project_categories ENABLE TRIGGER ALL;
 
 ALTER TABLE comments DISABLE TRIGGER ALL;
 INSERT INTO COMMENTS(text, user_id, article_id) VALUES

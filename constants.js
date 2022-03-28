@@ -12,7 +12,7 @@
 // const DEFAULT_COUNT = 1;
 // const FILE_NAME = `mocks.json`;
 // const DEFAULT_COMMAND = `--help`;
-// const USER_ARGV_INDEX = 2;
+const USER_ARGV_INDEX = 2;
 const ExitCode = {
     success: 0,
     error: 1
@@ -43,7 +43,7 @@ module.exports = {
     //   FILE_CATEGORIES_PATH,
     //   FILE_COMMENTS_PATH,
     //   SumRestrict,
-    //   USER_ARGV_INDEX,
+    USER_ARGV_INDEX,
     ExitCode,
     //   DEFAULT_PORT,
     //   FILENAME,
