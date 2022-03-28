@@ -9,6 +9,7 @@ class CategoryService {
   }
 
   async findAll() {
+    console.error(`aaaqqq111`)
     return this._Category.findAll();
   }
   async findOne(categoryId) {

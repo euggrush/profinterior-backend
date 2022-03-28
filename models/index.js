@@ -1,9 +1,9 @@
 "use strict";
 
-const PictureModel = require(`./picture`);
-const ProjectModel = require(`./project`);
-const CategoryModel = require(`./category`);
-const UserModel = require(`./user`);
+const PictureModel = require(`./picture.js`);
+const ProjectModel = require(`./project.js`);
+const CategoryModel = require(`./category.js`);
+const UserModel = require(`./user.js`);
 
 
 const define = (sequelize) => {

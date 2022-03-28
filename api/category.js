@@ -13,9 +13,13 @@ module.exports = (app, service) => {
   app.use(`/categories`, route);
 
   route.get(`/`, async (req, res) => {
-    const categories = await service.findAll();
-    res.status(HttpCode.OK)
-      .json(categories);
+    try {
+      const categories = await service.findAll();
+      res.status(HttpCode.OK)
+        .json(categories);
+    } catch (err) {
+      console.error("Something went wrong")
+    }
   });
 
   route.get(`/:categoryId`, async (req, res) => {
