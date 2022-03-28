@@ -27,7 +27,6 @@ CREATE TABLE projects(
   title varchar(255) NOT NULL,
   created_at timestamp DEFAULT current_timestamp,
   description text NOT NULL,
-  pictures text NOT NULL,
   user_id integer NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

@@ -16,14 +16,13 @@ module.exports = (app, projectService) => {
   app.use(`/projects`, route);
 
   route.get(`/`, async (req, res) => {
-    const {limit, offset} = req.query;
-    let projects;
-    if (limit || offset) {
-      projects = await projectService.findPage(limit, offset);
-    } else {
-      projects = await projectService.findAll();
+    try {
+      const projects = await projectService.findAll();
+      res.status(HttpCode.OK).json(projects);
+    } catch (err) {
+      console.error(err)
     }
-    res.status(HttpCode.OK).json(projects);
+
   });
 
 
