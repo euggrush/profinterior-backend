@@ -9,8 +9,8 @@ class CategoryService {
   }
 
   async findAll() {
-    console.error(`aaaqqq111`)
-    return this._Category.findAll();
+    const categories = await this._Category.findAll();
+    return categories;
   }
   async findOne(categoryId) {
     return this._Category.findByPk(categoryId);

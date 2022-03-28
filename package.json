@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "cross-env LOG_LEVEL=info node -r dotenv/config app.js --server 3000",
+    "start": "cross-env LOG_LEVEL=error node -r dotenv/config app.js --server 3000",
     "kill": "npx kill-port 3000"
   },
   "dependencies": {

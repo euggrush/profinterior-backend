@@ -18,7 +18,7 @@ module.exports = (app, service) => {
       res.status(HttpCode.OK)
         .json(categories);
     } catch (err) {
-      console.error("Something went wrong")
+      console.error(err)
     }
   });
 

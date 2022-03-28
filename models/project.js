@@ -14,7 +14,7 @@ const define = (sequelize) => Project.init({
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(1000),
+    type: DataTypes.TEXT,
     allowNull: false
   },
 }, {

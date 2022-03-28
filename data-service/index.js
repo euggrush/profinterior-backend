@@ -1,9 +1,9 @@
 'use strict';
 
-const CategoryService = require(`../data-service/category.js`);
-const ProjectService = require(`../data-service/project`);
-const PictureService = require(`../data-service/picture`);
-const UserService = require(`../data-service/user.js`);
+const CategoryService = require(`./category`);
+const ProjectService = require(`./project`);
+const PictureService = require(`./picture`);
+const UserService = require(`./user`);
 
 module.exports = {
   CategoryService,

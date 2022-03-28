@@ -28,13 +28,7 @@ class ProjectService {
 
   async findAll() {
     const include = [
-      Aliase.CATEGORIES, {
-        model: this._User,
-        as: Aliase.USERS,
-        attributes: {
-          exclude: [`passwordHash`]
-        }
-      },
+      Aliase.CATEGORIES,
       Aliase.PICTURES
     ];
     const projects = await this._Project.findAll({

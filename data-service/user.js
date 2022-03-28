@@ -6,12 +6,7 @@ class UserService {
   }
 
   findAll() {
-    const options = {
-      order: [
-        [`created_at`, `DESC`]
-      ]
-    };
-    return this._User.findAll(options);
+    return this._User.findAll();
   }
 
   async create(userData) {
