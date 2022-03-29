@@ -24,8 +24,7 @@ const define = (sequelize) => Category.init({
 const defineRelations = ({
     Project
 }) => {
-    Category.belongsToMany(Project, {
-        through: Aliase.PROJECT_CATEGORIES,
+    Category.hasMany(Project, {
         as: Aliase.PROJECTS,
         foreignKey: `category_id`
     });

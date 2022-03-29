@@ -22,15 +22,10 @@ const define = (sequelize) => Picture.init({
 });
 
 const defineRelations = ({
-    Project,
-    User
+    Project
 }) => {
     Picture.belongsTo(Project, {
         foreignKey: `project_id`
-    });
-    Picture.belongsTo(User, {
-        as: Aliase.USERS,
-        foreignKey: `user_id`
     });
 };
 

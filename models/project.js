@@ -27,22 +27,15 @@ const define = (sequelize) => Project.init({
 
 const defineRelations = ({
   Picture,
-  Category,
-  User
+  Category
 }) => {
   Project.hasMany(Picture, {
     as: Aliase.PHOTOS,
     foreignKey: `project_id`,
     onDelete: `cascade`
   });
-  Project.belongsToMany(Category, {
-    through: Aliase.PROJECT_CATEGORIES,
-    as: Aliase.CATEGORIES,
-    foreignKey: `project_id`
-  });
-  Project.belongsTo(User, {
-    as: Aliase.USERS,
-    foreignKey: `user_id`
+  Project.belongsTo(Category, {
+    foreignKey: `category_id`
   });
 };
 

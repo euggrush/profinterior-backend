@@ -19,15 +19,7 @@ const define = (sequelize) => User.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    first_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    last_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    avatar: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -45,17 +37,17 @@ const define = (sequelize) => User.init({
 });
 
 const defineRelations = ({
-    Picture,
-    Project
+    // Picture,
+    // Project
 }) => {
-    User.hasMany(Project, {
-        as: Aliase.PROJECTS,
-        foreignKey: `user_id`
-    });
-    User.hasMany(Picture, {
-        as: Aliase.PICTURES,
-        foreignKey: `user_id`
-    });
+    // User.hasMany(Project, {
+    //     as: Aliase.PROJECTS,
+    //     foreignKey: `user_id`
+    // });
+    // User.hasMany(Picture, {
+    //     as: Aliase.PICTURES,
+    //     foreignKey: `user_id`
+    // });
 };
 
 module.exports = {
