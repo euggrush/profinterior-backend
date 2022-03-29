@@ -25,17 +25,17 @@ INSERT INTO project_categories(project_id, category_id) VALUES
 (5, 3);
 ALTER TABLE project_categories ENABLE TRIGGER ALL;
 
-ALTER TABLE comments DISABLE TRIGGER ALL;
-INSERT INTO COMMENTS(text, user_id, article_id) VALUES
-('Хочу такую же футболку :-), Мне не нравится ваш стиль. Ощущение, что вы меня поучаете.,', 2, 1),
-('Совсем немного...,', 2, 1),
-('Мне кажется или я уже читал это где-то?, Хочу такую же футболку :-), Планируете записать видосик на эту тему?', 1, 2),
-('Это где ж такие красоты?', 1, 2),
-('Согласен с автором!', 1, 3),
-('Плюсую, но слишком много буквы!, Совсем немного..., Согласен с автором!', 1, 3),
-('Согласен с автором!, Мне не нравится ваш стиль. Ощущение, что вы меня поучаете., Совсем немного...,', 2, 4),
-('Совсем немного..., Это где ж такие красоты?, Мне кажется или я уже читал это где-то?', 2, 4),
-('Планируете записать видосик на эту тему?', 2, 5),
-('Давно не пользуюсь стационарными компьютерами. Ноутбуки победили.', 1, 5);
-ALTER TABLE comments ENABLE TRIGGER ALL;
+ALTER TABLE pictures DISABLE TRIGGER ALL;
+INSERT INTO pictures(path, user_id, project_id) VALUES
+('image1.jpeg', 1, 1),
+('image2.jpeg', 1, 1),
+('image3.jpeg', 1, 2),
+('image4.jpeg', 1, 2),
+('image5.jpeg', 1, 3),
+('image6.jpeg', 1, 3),
+('image7.jpeg', 1, 4),
+('image8.jpeg', 1, 4),
+('image9.jpeg', 1, 3),
+('image10.jpeg', 1, 1);
+ALTER TABLE pictures ENABLE TRIGGER ALL;
 
