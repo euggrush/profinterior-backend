@@ -28,7 +28,7 @@ class ProjectService {
 
   async findAll() {
     const include = [
-      // Aliase.CATEGORIES,
+      Aliase.CATEGORIES,
       Aliase.PHOTOS
     ];
     const projects = await this._Project.findAll({

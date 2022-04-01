@@ -35,8 +35,10 @@ const defineRelations = ({
     onDelete: `cascade`
   });
   Project.belongsTo(Category, {
-    foreignKey: `category_id`
+    as: Aliase.CATEGORIES,
+    foreignKey: 'category_id'
   });
+
 };
 
 module.exports = {
