@@ -16,13 +16,16 @@ module.exports = (app, projectService) => {
   app.use(`/projects`, route);
 
   route.get(`/`, async (req, res) => {
-    try {
-      const projects = await projectService.findAll();
-      res.status(HttpCode.OK).json(projects);
-    } catch (err) {
-      console.error(err)
-    }
+    let projects = [];
+    const query = req.query;
+    if (Object.keys(query).length === 0) {
+      projects = await projectService.findAll();
 
+    } else {
+      console.log(query);
+      projects = await projectService.findPage(query);
+    }
+    res.status(HttpCode.OK).json(projects);
   });
 
 

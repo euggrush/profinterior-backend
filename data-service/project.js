@@ -1,6 +1,7 @@
 'use strict';
 
 const Aliase = require(`../models/aliase`);
+const {Op} = require(`sequelize`);
 
 class ProjectService {
   constructor(sequelize) {
@@ -35,7 +36,8 @@ class ProjectService {
       include
     });
 
-    return projects.map((item) => item.get());
+    return projects;
+
   }
 
   async findOne(projectId) {
@@ -46,18 +48,13 @@ class ProjectService {
     });
   }
 
-  async findPage(limit, offset) {
-    const {
-      count,
-      rows
-    } = await this._Project.findAndCountAll({
-      limit,
-      offset
+  async findPage(searchText) {
+    const projects = await this._Project.findAll({
+      where: {
+        category_id: searchText.category_id
+      }
     });
-    return {
-      count,
-      projects: rows
-    };
+    return projects;
   }
 
 
