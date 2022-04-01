@@ -15,46 +15,46 @@ class CategoryService {
   async findOne(categoryId) {
     return this._Category.findByPk(categoryId);
   }
-  async findPage(categoryId, limit, offset) {
-    const include = [
-      Aliase.CATEGORIES
-    ];
+  // async findPage(categoryId, limit, offset) {
+  //   const include = [
+  //     Aliase.CATEGORIES
+  //   ];
 
-    const projects = await this._Project.findAll({
-      include
-    });
+  //   const projects = await this._Project.findAll({
+  //     include
+  //   });
 
-    const projectsIdByCategory = [];
+  //   const projectsIdByCategory = [];
 
-    projects.map((project) => {
-      project.categories.map((category) => {
-        if (category.id == categoryId) {
-          projectsIdByCategory.push(project.id);
-        }
-      });
-    });
+  //   projects.map((project) => {
+  //     project.categories.map((category) => {
+  //       if (category.id == categoryId) {
+  //         projectsIdByCategory.push(project.id);
+  //       }
+  //     });
+  //   });
 
 
-    const {
-      count,
-      rows
-    } = await this._Project.findAndCountAll({
-      limit,
-      offset,
-      include: [
-        Aliase.CATEGORIES,
-      ],
-      where: {
-        id: projectsIdByCategory
-      },
-      distinct: true
-    });
+  //   const {
+  //     count,
+  //     rows
+  //   } = await this._Project.findAndCountAll({
+  //     limit,
+  //     offset,
+  //     include: [
+  //       Aliase.CATEGORIES,
+  //     ],
+  //     where: {
+  //       id: projectsIdByCategory
+  //     },
+  //     distinct: true
+  //   });
 
-    return {
-      count,
-      projectsByCategory: rows
-    };
-  }
+  //   return {
+  //     count,
+  //     projectsByCategory: rows
+  //   };
+  // }
 }
 
 module.exports = CategoryService;

@@ -45,7 +45,7 @@ const defineRelations = ({
     //     foreignKey: `user_id`
     // });
     // User.hasMany(Picture, {
-    //     as: Aliase.PICTURES,
+    //     as: Aliase.PHOTOS,
     //     foreignKey: `user_id`
     // });
 };

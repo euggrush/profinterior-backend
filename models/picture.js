@@ -25,6 +25,7 @@ const defineRelations = ({
     Project
 }) => {
     Picture.belongsTo(Project, {
+        as: Aliase.PROJECTS,
         foreignKey: `project_id`
     });
 };

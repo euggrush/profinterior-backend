@@ -40,7 +40,7 @@ class ProjectService {
 
   async findOne(projectId) {
     const include = [];
-    include.push(Aliase.CATEGORIES, Aliase.PICTURES);
+    include.push(Aliase.CATEGORIES, Aliase.PHOTOS);
     return await this._Project.findByPk(projectId, {
       include
     });

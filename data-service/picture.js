@@ -13,11 +13,10 @@ class PictureService {
     });
   }
 
-  async drop(userId, projectId, pictureId) {
+  async drop(projectId, pictureId) {
     const projectByUser = await this._Project.findOne({
       where: {
-        id: projectId,
-        userId
+        id: projectId
       }
     });
 
@@ -35,9 +34,7 @@ class PictureService {
   }
 
   async findAll() {
-    return await this._Picture.findAll({
-      raw: true
-    });
+    return await this._Picture.findAll();
   }
 
   async findOne(id, projectId) {
