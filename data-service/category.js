@@ -8,6 +8,10 @@ class CategoryService {
     this._Category = sequelize.models.Category;
   }
 
+  async create(categoryData) {
+    const category = await this._Category.create(categoryData);
+    return category;
+  }
   async findAll() {
     const categories = await this._Category.findAll();
     return categories;
