@@ -9,56 +9,29 @@ class CategoryService {
   }
 
   async create(categoryData) {
-    const category = await this._Category.create(categoryData);
-    return category;
+    return await this._Category.create(categoryData);
+  }
+  async drop(id) {
+    const deletedRow = await this._Category.destroy({
+      where: {
+        id
+      }
+    });
+
+    return !!deletedRow;
   }
   async findAll() {
-    const categories = await this._Category.findAll();
+    const include = [
+      Aliase.CATEGORY_IMAGES
+    ];
+    const categories = await this._Category.findAll({
+      include
+    });
     return categories;
   }
   async findOne(categoryId) {
     return this._Category.findByPk(categoryId);
   }
-  // async findPage(categoryId, limit, offset) {
-  //   const include = [
-  //     Aliase.CATEGORIES
-  //   ];
-
-  //   const projects = await this._Project.findAll({
-  //     include
-  //   });
-
-  //   const projectsIdByCategory = [];
-
-  //   projects.map((project) => {
-  //     project.categories.map((category) => {
-  //       if (category.id == categoryId) {
-  //         projectsIdByCategory.push(project.id);
-  //       }
-  //     });
-  //   });
-
-
-  //   const {
-  //     count,
-  //     rows
-  //   } = await this._Project.findAndCountAll({
-  //     limit,
-  //     offset,
-  //     include: [
-  //       Aliase.CATEGORIES,
-  //     ],
-  //     where: {
-  //       id: projectsIdByCategory
-  //     },
-  //     distinct: true
-  //   });
-
-  //   return {
-  //     count,
-  //     projectsByCategory: rows
-  //   };
-  // }
 }
 
 module.exports = CategoryService;

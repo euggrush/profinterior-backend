@@ -29,3 +29,10 @@ INSERT INTO pictures(path, project_id) VALUES
 ('image10.jpeg', 1);
 ALTER TABLE pictures ENABLE TRIGGER ALL;
 
+ALTER TABLE category_images DISABLE TRIGGER ALL;
+INSERT INTO category_images(path, category_id) VALUES
+('https://i.ibb.co/b6HKNSp/gallery-bedroom2.jpg', 1),
+('https://i.ibb.co/cT4F7Ch/livingroom1.jpg', 2),
+('https://i.ibb.co/6Z3hQc3/gallery-bathroom.jpg', 3);
+ALTER TABLE pictures ENABLE TRIGGER ALL;
+

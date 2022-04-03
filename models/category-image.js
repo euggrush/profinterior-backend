@@ -6,10 +6,10 @@ const {
 } = require(`sequelize`);
 const Aliase = require(`./aliase`);
 
-class Category extends Model {}
+class CategoryImage extends Model {}
 
-const define = (sequelize) => Category.init({
-    name: {
+const define = (sequelize) => CategoryImage.init({
+    path: {
         type: DataTypes.STRING,
         allowNull: false
     }
@@ -17,20 +17,15 @@ const define = (sequelize) => Category.init({
     createdAt: false,
     updatedAt: false,
     sequelize,
-    modelName: `Category`,
-    tableName: `categories`
+    modelName: `CategoryImage`,
+    tableName: `category_images`
 });
 
 const defineRelations = ({
-    Project,
-    CategoryImage
+    Category
 }) => {
-    Category.hasMany(Project, {
-        as: Aliase.PROJECTS,
-        foreignKey: `category_id`
-    });
-    Category.hasOne(CategoryImage, {
-        as: Aliase.CATEGORY_IMAGES,
+    CategoryImage.belongsTo(Category, {
+        as: Aliase.CATEGORIES,
         foreignKey: `category_id`
     });
 };
