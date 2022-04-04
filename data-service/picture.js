@@ -6,30 +6,17 @@ class PictureService {
     this._Picture = sequelize.models.Picture;
   }
 
-  async create(projectId, picture) {
-    return await this._Picture.create({
-      projectId,
-      ...picture
-    });
+  async create(pictureData) {
+    let picture = await this._Picture.create(pictureData);
+    return picture.get();
   }
 
-  async drop(projectId, pictureId) {
-    const projectByUser = await this._Project.findOne({
-      where: {
-        id: projectId
-      }
-    });
-
-    if (!projectByUser) {
-      return !!projectByUser;
-    }
-
+  async drop(pictureId) {
     const deletedRows = await this._Picture.destroy({
       where: {
         id: pictureId
       }
     });
-
     return !!deletedRows;
   }
 

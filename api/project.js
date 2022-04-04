@@ -7,9 +7,7 @@ const {
   HttpCode
 } = require(`../constants`);
 
-
 const route = new Router();
-
 
 module.exports = (app, projectService) => {
 
