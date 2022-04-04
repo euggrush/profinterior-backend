@@ -18,7 +18,7 @@ const define = (sequelize) => Project.init({
     allowNull: false
   },
 }, {
-  createdAt: false,
+  createdAt: `created_at`,
   updatedAt: false,
   sequelize,
   modelName: `Project`,

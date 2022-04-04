@@ -1,7 +1,9 @@
 'use strict';
 
 const Aliase = require(`../models/aliase`);
-const {Op} = require(`sequelize`);
+const {
+  Op
+} = require(`sequelize`);
 
 class ProjectService {
   constructor(sequelize) {
@@ -13,7 +15,7 @@ class ProjectService {
   }
 
   async create(projectData) {
-    const project = await this._Project.create(projectData);
+    let project = await this._Project.create(projectData);
     return project.get();
   }
 
@@ -30,10 +32,13 @@ class ProjectService {
   async findAll() {
     const include = [
       Aliase.CATEGORIES,
-      Aliase.PHOTOS
+      Aliase.PHOTOS,
     ];
     const projects = await this._Project.findAll({
-      include
+      include,
+      order: [
+        [`created_at`, `DESC`]
+      ]
     });
 
     return projects;
@@ -58,25 +63,20 @@ class ProjectService {
   }
 
 
-  async update({
-    id,
-    project
-  }) {
-    const affectedRows = await this._Project.update(project, {
+  async update(id, projectData) {
+    const affectedRows = await this._Project.update(projectData, {
       where: {
         id,
-        userId: project.userId
       }
     });
 
     const updatedProject = await this._Project.findOne({
       where: {
-        id,
-        userId: project.userId
+        id
       }
     });
 
-    await updatedProject.setCategories(project.categories);
+    await updatedProject.setCategories(projectData.categories);
 
     return !!affectedRows;
   }
