@@ -4,14 +4,14 @@
 // const FILE_TITLES_PATH = `./data/titles.txt`;
 // const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 // const FILE_COMMENTS_PATH = `./data/comments.txt`;
-// const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 3000;
 // const FILENAME = `mocks.json`;
 // const MAX_COMMENTS = 4;
 
 // const MAX_ID_LENGTH = 6;
 // const DEFAULT_COUNT = 1;
 // const FILE_NAME = `mocks.json`;
-// const DEFAULT_COMMAND = `--help`;
+const DEFAULT_COMMAND = `--server`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
     success: 0,
@@ -36,7 +36,7 @@ const API_PREFIX = `/api`;
 
 module.exports = {
     //   DEFAULT_COUNT,
-    //   DEFAULT_COMMAND,
+      DEFAULT_COMMAND,
     //   FILE_NAME,
     //   FILE_SENTENCES_PATH,
     //   FILE_TITLES_PATH,
@@ -45,7 +45,7 @@ module.exports = {
     //   SumRestrict,
     USER_ARGV_INDEX,
     ExitCode,
-    //   DEFAULT_PORT,
+      DEFAULT_PORT,
     //   FILENAME,
     //   MAX_ID_LENGTH,
     //   MAX_COMMENTS,

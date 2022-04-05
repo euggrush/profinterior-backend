@@ -3,15 +3,14 @@
 const express = require(`express`);
 const {
     HttpCode,
-    API_PREFIX
+    API_PREFIX,
+    DEFAULT_PORT
 } = require(`../constants`);
 const routes = require(`../api`);
 const {
     getLogger
 } = require(`../lib/logger`);
 const sequelize = require(`../lib/sequelize`);
-
-const DEFAULT_PORT = 4000;
 
 const app = express();
 const logger = getLogger({
