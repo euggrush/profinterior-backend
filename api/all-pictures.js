@@ -12,6 +12,11 @@ const {
 
 const upload = require(`../middlewares/upload`);
 
+const cutPath = (arg1, arg2) => {
+    const path = arg1.substring(arg1.indexOf(arg2));
+    return path;
+};
+
 module.exports = (app, pictureService) => {
 
     app.use(`/pictures`, route);
@@ -39,7 +44,6 @@ module.exports = (app, pictureService) => {
     });
 
     route.post(`/`, upload.single(`upload`), async (req, res) => {
-        // const picture = await pictureService.create(req.body);
         const meta = req.body.meta;
         const file = req.file;
         const projectId = JSON.parse(meta).project_id
@@ -48,7 +52,7 @@ module.exports = (app, pictureService) => {
         // console.log(file);
 
         const pictureData = {
-            path: file ? file.path : ``,
+            path: file ? cutPath(file.path, `/upload`) : ``,
             project_id: projectId
         };
 
