@@ -11,7 +11,7 @@ const {
 } = require(`../lib/logger`);
 const sequelize = require(`../lib/sequelize`);
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 4000;
 
 const app = express();
 const logger = getLogger({
