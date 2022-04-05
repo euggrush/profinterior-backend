@@ -11,6 +11,7 @@ class Picture extends Model {}
 const define = (sequelize) => Picture.init({
     path: {
         type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     createdAt: false,

@@ -10,6 +10,7 @@ const {
     HttpCode
 } = require(`../constants`);
 
+const upload = require(`../middlewares/upload`);
 
 module.exports = (app, pictureService) => {
 
@@ -37,15 +38,29 @@ module.exports = (app, pictureService) => {
             .json(deleted);
     });
 
-    route.post(`/`, async (req, res) => {
-        const picture = await pictureService.create(req.body);
+    route.post(`/`, upload.single(`upload`), async (req, res) => {
+        // const picture = await pictureService.create(req.body);
+        const meta = req.body.meta;
+        const file = req.file;
+        const projectId = JSON.parse(meta).project_id
 
-        if (!picture) {
+        // console.log(projectId);
+        // console.log(file);
+
+        const pictureData = {
+            path: file ? file.path : ``,
+            project_id: projectId
+        };
+
+        try {
+            const picture = await pictureService.create(pictureData);
+            return res.status(HttpCode.CREATED)
+                .json(picture);
+
+        } catch (err) {
+            console.log(err)
             return res.status(HttpCode.BAD_REQUEST)
                 .send(`Not created`);
         }
-
-        return res.status(HttpCode.CREATED)
-            .json(picture);
     });
 };
