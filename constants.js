@@ -4,7 +4,7 @@
 // const FILE_TITLES_PATH = `./data/titles.txt`;
 // const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 // const FILE_COMMENTS_PATH = `./data/comments.txt`;
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 4000;
 // const FILENAME = `mocks.json`;
 // const MAX_COMMENTS = 4;
 
