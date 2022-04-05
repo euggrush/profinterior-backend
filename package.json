@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config app.js --server 3000",
+    "start": "node -r app.js --server 3000",
     "kill": "npx kill-port 3000"
   },
   "dependencies": {
