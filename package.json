@@ -8,24 +8,25 @@
   "scripts": {
     "start": "node app.js",
     "start::debug": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
-    "kill": "npx kill-port 3000"
+    "kill": "npx kill-port 4000"
   },
   "dependencies": {
+    "bcrypt": "5.0.1",
     "cookie-parser": "1.4.4",
+    "cross-env": "7.0.3",
     "debug": "2.6.9",
+    "dotenv": "16.0.0",
     "express": "4.16.1",
     "http-errors": "1.6.3",
     "jade": "1.11.0",
-    "morgan": "1.9.1",
-    "pg": "8.7.3",
-    "cross-env": "7.0.3",
-    "dotenv": "16.0.0",
     "joi": "17.6.0",
+    "morgan": "1.9.1",
     "multer": "1.4.4",
     "nanoid": "3.3.2",
-    "sequelize": "6.17.0",
+    "pg": "8.7.3",
     "pino": "7.9.2",
-    "pino-pretty": "7.6.0"
+    "pino-pretty": "7.6.0",
+    "sequelize": "6.17.0"
   },
   "devDependencies": {}
 }

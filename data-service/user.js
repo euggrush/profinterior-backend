@@ -8,6 +8,23 @@ class UserService {
   findAll() {
     return this._User.findAll();
   }
+
+  async create(userData) {
+    let role;
+    const users = await this._User.findOne({
+      where: {
+        role: `admin`
+      }
+    });
+    if (users === null) {
+      role = `admin`;
+    } else {
+      role = `user`;
+    }
+    userData.role = role;
+    const user = await this._User.create(userData);
+    return user.get();
+  }
 }
 
 module.exports = UserService;

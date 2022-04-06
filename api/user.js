@@ -8,7 +8,7 @@ const {
   HttpCode
 } = require(`../constants`);
 
-// const passwordUtils = require(`../lib/password`);
+const passwordUtils = require(`../lib/password`);
 
 const route = new Router();
 
@@ -29,7 +29,7 @@ module.exports = (app, service) => {
   route.post(`/`, async (req, res) => {
     const data = req.body;
 
-    // data.password_hash = await passwordUtils.hash(data.password);
+    data.password_hash = await passwordUtils.hash(data.password);
 
     const result = await service.create(data);
 
