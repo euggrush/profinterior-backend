@@ -64,3 +64,5 @@ module.exports.HttpMethod = {
     PUT: `PUT`,
     DELETE: `DELETE`
 };
+module.exports.JWT_ACCESS_SECRET = `secret`;
+module.exports.JWT_REFRESH_SECRET = `secret-refresh`;

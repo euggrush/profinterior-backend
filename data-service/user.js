@@ -32,6 +32,7 @@ class UserService {
         email
       }
     });
+
     return user && user.get();
   }
 }

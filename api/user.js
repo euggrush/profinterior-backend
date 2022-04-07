@@ -9,6 +9,8 @@ const {
 } = require(`../constants`);
 
 const passwordUtils = require(`../lib/password`);
+const makeTokens = require(`../middlewares/jwt-helper`);
+const refreshTokenService = require(`../middlewares/refresh-token-service`);
 
 const route = new Router();
 
@@ -55,7 +57,22 @@ module.exports = (app, service) => {
 
     if (passwordIsCorrect) {
       delete user.password_hash;
-      res.status(HttpCode.OK).json(user);
+      const {
+        id
+      } = user.id;
+      const {
+        accessToken,
+        refreshToken
+      } = makeTokens({
+        id
+      });
+
+      await refreshTokenService.add(refreshToken);
+
+      res.status(HttpCode.OK).json({
+        accessToken,
+        refreshToken
+      });
     } else {
       res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.PASSWORD);
     }
