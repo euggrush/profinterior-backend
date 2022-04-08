@@ -9,6 +9,8 @@ const {
 
 const route = new Router();
 
+const authenticateJwt = require(`../middlewares/authenticate-jwt`);
+
 module.exports = (app, projectService) => {
 
   app.use(`/projects`, route);
@@ -42,7 +44,7 @@ module.exports = (app, projectService) => {
       .json(project);
   });
 
-  route.post(`/`, (req, res) => {
+  route.post(`/`, authenticateJwt, (req, res) => {
     const project = projectService.create(req.body);
     if (!project) {
       return res.status(HttpCode.BAD_REQUEST)
@@ -53,7 +55,7 @@ module.exports = (app, projectService) => {
       .json(project);
   });
 
-  route.put(`/:projectId`, (req, res) => {
+  route.put(`/:projectId`, authenticateJwt, (req, res) => {
     const {
       projectId
     } = req.params;
@@ -68,7 +70,7 @@ module.exports = (app, projectService) => {
       .send(updated);
   });
 
-  route.delete(`/:projectId`, (req, res) => {
+  route.delete(`/:projectId`, authenticateJwt, (req, res) => {
     const {
       projectId
     } = req.params;

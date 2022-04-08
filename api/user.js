@@ -70,8 +70,9 @@ module.exports = (app, service) => {
       await refreshTokenService.add(refreshToken);
 
       res.status(HttpCode.OK).json({
+        user,
         accessToken,
-        refreshToken
+        // refreshToken
       });
     } else {
       res.status(HttpCode.UNAUTHORIZED).send(ErrorAuthMessage.PASSWORD);

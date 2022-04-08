@@ -8,7 +8,7 @@ const {
 
 module.exports = (tokenData) => {
     const accessToken = jwt.sign(tokenData, JWT_ACCESS_SECRET, {
-        expiresIn: `50s`
+        expiresIn: `85000s`
     });
     const refreshToken = jwt.sign(tokenData, JWT_REFRESH_SECRET);
     return {
