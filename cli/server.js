@@ -50,8 +50,7 @@ module.exports = {
             process.exit(1);
         }
         logger.info(`Connection to database established`);
-        const [customPort] = args;
-        const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
+        const port = process.env.PORT || 4000;
 
         try {
             app.listen(port, (err) => {
