@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "serve -s build",
+    "start": "node app.js",
     "dev": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
     "kill": "npx kill-port 4000"
   },
