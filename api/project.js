@@ -10,6 +10,7 @@ const {
 const route = new Router();
 
 const authenticateJwt = require(`../middlewares/authenticate-jwt`);
+const isAdmin = require(`../middlewares/admin-only`);
 
 module.exports = (app, projectService) => {
 
@@ -44,13 +45,15 @@ module.exports = (app, projectService) => {
       .json(project);
   });
 
-  route.post(`/`, authenticateJwt, (req, res) => {
+  route.post(`/`, authenticateJwt, isAdmin, (req, res) => {
+    // const { role } = req.user;
+    // console.log(res.locals.user.role)
+
     const project = projectService.create(req.body);
     if (!project) {
       return res.status(HttpCode.BAD_REQUEST)
         .send(`Not created`);
     }
-
     return res.status(HttpCode.CREATED)
       .json(project);
   });

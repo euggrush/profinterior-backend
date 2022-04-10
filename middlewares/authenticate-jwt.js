@@ -25,6 +25,7 @@ module.exports = (req, res, next) => {
         if (err) {
             return res.sendStatus(HttpStatus.FORBIDDEN);
         }
+        res.locals = userData;
         next()
     })
 }

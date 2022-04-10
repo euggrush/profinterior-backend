@@ -58,13 +58,10 @@ module.exports = (app, service) => {
     if (passwordIsCorrect) {
       delete user.password_hash;
       const {
-        id
-      } = user.id;
-      const {
         accessToken,
         refreshToken
       } = makeTokens({
-        id
+        user
       });
 
       await refreshTokenService.add(refreshToken);
