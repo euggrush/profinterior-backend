@@ -6,8 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "start::debug": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
+    "start": "serve -s build",
+    "dev": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
     "kill": "npx kill-port 4000"
   },
   "dependencies": {
@@ -28,7 +28,8 @@
     "pg": "8.7.3",
     "pino": "7.9.2",
     "pino-pretty": "7.6.0",
-    "sequelize": "6.17.0"
+    "sequelize": "6.17.0",
+    "serve": "13.0.2"
   },
   "devDependencies": {}
 }
