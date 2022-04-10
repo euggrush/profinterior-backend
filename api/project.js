@@ -46,9 +46,6 @@ module.exports = (app, projectService) => {
   });
 
   route.post(`/`, authenticateJwt, isAdmin, (req, res) => {
-    // const { role } = req.user;
-    // console.log(res.locals.user.role)
-
     const project = projectService.create(req.body);
     if (!project) {
       return res.status(HttpCode.BAD_REQUEST)
@@ -58,7 +55,7 @@ module.exports = (app, projectService) => {
       .json(project);
   });
 
-  route.put(`/:projectId`, authenticateJwt, (req, res) => {
+  route.put(`/:projectId`, authenticateJwt, isAdmin, (req, res) => {
     const {
       projectId
     } = req.params;
@@ -73,7 +70,7 @@ module.exports = (app, projectService) => {
       .send(updated);
   });
 
-  route.delete(`/:projectId`, authenticateJwt, (req, res) => {
+  route.delete(`/:projectId`, authenticateJwt, isAdmin, (req, res) => {
     const {
       projectId
     } = req.params;

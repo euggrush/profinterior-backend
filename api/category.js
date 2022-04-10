@@ -9,6 +9,9 @@ const {
 
 const route = new Router();
 
+const authenticateJwt = require(`../middlewares/authenticate-jwt`);
+const isAdmin = require(`../middlewares/admin-only`);
+
 module.exports = (app, service) => {
   app.use(`/categories`, route);
 
@@ -22,7 +25,7 @@ module.exports = (app, service) => {
     }
   });
 
-  route.post(`/`, (req, res) => {
+  route.post(`/`, authenticateJwt, isAdmin, (req, res) => {
     const category = service.create(req.body);
     if (!category) {
       return res.status(HttpCode.BAD_REQUEST)
@@ -33,7 +36,7 @@ module.exports = (app, service) => {
       .json(category);
   });
 
-  route.delete(`/:categoryId`, (req, res) => {
+  route.delete(`/:categoryId`, authenticateJwt, isAdmin, (req, res) => {
     const {
       categoryId
     } = req.params;

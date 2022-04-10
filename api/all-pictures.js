@@ -11,6 +11,8 @@ const {
 } = require(`../constants`);
 
 const upload = require(`../middlewares/upload`);
+const authenticateJwt = require(`../middlewares/authenticate-jwt`);
+const isAdmin = require(`../middlewares/admin-only`);
 
 const cutPath = (arg1, arg2) => {
     const path = arg1.substring(arg1.indexOf(arg2));
@@ -27,7 +29,7 @@ module.exports = (app, pictureService) => {
         res.status(HttpCode.OK)
             .json(pictures);
     });
-    route.delete(`/:pictureId`, async (req, res) => {
+    route.delete(`/:pictureId`, authenticateJwt, isAdmin, async (req, res) => {
         const {
             pictureId
         } = req.params;
@@ -43,13 +45,10 @@ module.exports = (app, pictureService) => {
             .json(deleted);
     });
 
-    route.post(`/`, upload.single(`upload`), async (req, res) => {
+    route.post(`/`, authenticateJwt, isAdmin, upload.single(`upload`), async (req, res) => {
         const meta = req.body.meta;
         const file = req.file;
         const projectId = JSON.parse(meta).project_id
-
-        // console.log(projectId);
-        // console.log(file);
 
         const pictureData = {
             path: file ? cutPath(file.path, `/upload`) : ``,
