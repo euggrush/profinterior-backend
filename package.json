@@ -6,9 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "start::debug": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
-    "kill": "npx kill-port 4000"
+    "start": "cross-env LOG_LEVEL=error node -r dotenv/config app.js",
+    "kill": "npx kill-port 8000"
   },
   "dependencies": {
     "bcrypt": "5.0.1",
