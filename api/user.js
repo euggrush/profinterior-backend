@@ -21,7 +21,8 @@ const ErrorAuthMessage = {
 
 module.exports = (app, service) => {
   app.use(`/user`, route);
-  app.options('/login', function (req, res) {
+  
+  app.options('/auth', function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Headers", "*");
