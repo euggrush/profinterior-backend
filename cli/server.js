@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require(`express`);
-// const cors = require("cors");
+const cors = require("cors");
 
 const {
     HttpCode,
@@ -31,16 +31,16 @@ app.use((req, res, next) => {
 
 app.use(API_PREFIX, routes);
 
-// app.use(
-//     cors({
-//         origin: "*",
-//     })
-// );
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     next();
-// });
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
 
 app.use((req, res) => {
     res.status(HttpCode.NOT_FOUND)
