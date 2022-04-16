@@ -3,6 +3,9 @@
 const {
   Router
 } = require(`express`);
+
+const cors = require("cors");
+
 const {
   HttpCode
 } = require(`../constants`);
@@ -15,6 +18,22 @@ const isAdmin = require(`../middlewares/admin-only`);
 module.exports = (app, projectService) => {
 
   app.use(`/projects`, route);
+
+  route.use(cors({
+    origin: true
+  }));
+
+  route.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
+
+  route.options('/', function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.end();
+  });
 
   route.get(`/`, async (req, res) => {
     let projects = [];

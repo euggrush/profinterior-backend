@@ -4,6 +4,8 @@ const {
     Router
 } = require(`express`);
 
+const cors = require("cors");
+
 const route = new Router();
 
 const {
@@ -22,6 +24,22 @@ const cutPath = (arg1, arg2) => {
 module.exports = (app, pictureService) => {
 
     app.use(`/pictures`, route);
+
+    route.use(cors({
+        origin: true
+      }));
+    
+      route.use(function (req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        next();
+      });
+    
+      route.options('/', function (req, res) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader('Access-Control-Allow-Methods', '*');
+        res.setHeader("Access-Control-Allow-Headers", "*");
+        res.end();
+      });
 
     route.get(`/`, async (req, res) => {
         const pictures = await pictureService.findAll();
