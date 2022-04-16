@@ -4,6 +4,9 @@
 const {
   Router
 } = require(`express`);
+
+const cors = require("cors");
+
 const {
   HttpCode
 } = require(`../constants`);
@@ -21,6 +24,15 @@ const ErrorAuthMessage = {
 
 module.exports = (app, service) => {
   app.use(`/user`, route);
+
+  app.use(cors({
+    origin: true
+  }));
+
+  app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
 
   route.options('/auth', function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -47,7 +59,7 @@ module.exports = (app, service) => {
     res.status(HttpCode.CREATED)
       .json(result);
   });
-  
+
   route.post(`/auth`, async (req, res) => {
     const {
       email,

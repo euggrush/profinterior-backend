@@ -31,11 +31,9 @@ app.use((req, res, next) => {
 
 app.use(API_PREFIX, routes);
 
-app.use(
-    cors({
-        origin: "*",
-    })
-);
+app.use(cors({
+    origin: true
+}));
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
