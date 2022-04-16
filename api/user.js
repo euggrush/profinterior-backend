@@ -25,16 +25,16 @@ const ErrorAuthMessage = {
 module.exports = (app, service) => {
   app.use(`/user`, route);
 
-  app.use(cors({
+  route.use(cors({
     origin: true
   }));
 
-  app.use(function (req, res, next) {
+  route.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
   });
 
-  route.options('/auth', function (req, res) {
+  route.options('/', function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader("Access-Control-Allow-Headers", "*");
