@@ -22,6 +22,13 @@ const ErrorAuthMessage = {
 module.exports = (app, service) => {
   app.use(`/user`, route);
 
+  route.options('/auth', function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.end();
+  });
+
   route.get(`/`, async (req, res) => {
     const users = await service.findAll();
     res.status(HttpCode.OK)
@@ -39,13 +46,6 @@ module.exports = (app, service) => {
 
     res.status(HttpCode.CREATED)
       .json(result);
-  });
-
-  route.options('/auth', function (req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    res.end();
   });
   
   route.post(`/auth`, async (req, res) => {
