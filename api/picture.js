@@ -13,9 +13,9 @@ const {
 } = require(`../constants`);
 
 
-module.exports = (app, pictureService, projectService) => {
+module.exports = (app, pictureService) => {
 
-  app.use(`/projects`, route);
+  app.use(`/project-images`, route);
 
   route.use(cors({
     origin: true

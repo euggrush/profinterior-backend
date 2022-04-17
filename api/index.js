@@ -25,7 +25,7 @@ defineModels(sequelize);
 (() => {
     category(app, new CategoryService(sequelize));
     project(app, new ProjectService(sequelize));
-    picture(app, new ProjectService(sequelize), new PictureService(sequelize));
+    picture(app, new PictureService(sequelize));
     allPictures(app, new PictureService(sequelize));
     user(app, new UserService(sequelize));
 })();

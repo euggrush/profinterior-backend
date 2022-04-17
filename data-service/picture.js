@@ -24,13 +24,15 @@ class PictureService {
     return await this._Picture.findAll();
   }
 
-  async findOne(id, projectId) {
-    return await this._Picture.findOne({
-      where: {
-        id,
-        projectId
+  async findOne(projectId) {
+    const pictures = await this._Picture.findAll();
+    let projectPictures = [];
+    pictures.map((item) => {
+      if (item.project_id == projectId) {
+        projectPictures.push(item)
       }
-    });
+    })
+    return projectPictures;
   }
 
 }
