@@ -15,7 +15,7 @@ const {
 
 module.exports = (app, pictureService) => {
 
-  app.use(`/project-images`, route);
+  app.use(`/upload/img`, route);
 
   route.use(cors({
     origin: true
@@ -33,28 +33,13 @@ module.exports = (app, pictureService) => {
     res.end();
   });
 
-  route.get(`/:projectId/pictures`, async (req, res) => {
+  route.get(`/:pictureName`, async (req, res) => {
     const {
-      projectId
+      pictureName
     } = req.params;
-
-    const pictures = await pictureService.findOne(projectId);
-
-    res.status(HttpCode.OK)
-      .json(pictures);
-
-  });
-
-  route.get(`/:projectId/pictures/:pictureId`, async (req, res) => {
-    const {
-      projectId,
-      pictureId
-    } = req.params;
-
-    const picture = await pictureService.findOne(projectId, pictureId);
-
-    res.status(HttpCode.OK)
-      .json(picture);
-
+    const path = require('path');
+    const fs = require('fs');
+    const directoryPath = path.join(__dirname, '../upload/img');
+    res.sendFile(`${directoryPath}/${pictureName}`);
   });
 };

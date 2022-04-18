@@ -69,10 +69,9 @@ module.exports = (app, pictureService) => {
         const projectId = JSON.parse(meta).project_id
 
         const pictureData = {
-            path: file ? cutPath(file.path, `/upload`) : ``,
+            path: file ? cutPath(file.path, `/img`) : ``,
             project_id: projectId
         };
-
         try {
             const picture = await pictureService.create(pictureData);
             return res.status(HttpCode.CREATED)
