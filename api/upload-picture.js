@@ -17,8 +17,8 @@ const authenticateJwt = require(`../middlewares/authenticate-jwt`);
 const isAdmin = require(`../middlewares/admin-only`);
 
 const cutPath = (arg1, arg2) => {
-    const path = arg1.substring(arg1.indexOf(arg2));
-    return path;
+  const path = arg1.substring(arg1.indexOf(arg2));
+  return path;
 };
 
 
@@ -58,18 +58,40 @@ module.exports = (app, pictureService) => {
     const projectId = JSON.parse(meta).project_id
 
     const pictureData = {
-        path: file ? cutPath(file.path, `/img`) : ``,
-        project_id: projectId
+      path: file ? cutPath(file.path, `/img`) : ``,
+      project_id: projectId
     };
     try {
-        const picture = await pictureService.create(pictureData);
-        return res.status(HttpCode.CREATED)
-            .json(picture);
+      const picture = await pictureService.create(pictureData);
+      return res.status(HttpCode.CREATED)
+        .json(picture);
 
     } catch (err) {
-        console.log(err)
-        return res.status(HttpCode.BAD_REQUEST)
-            .send(`Not created`);
+      console.log(err)
+      return res.status(HttpCode.BAD_REQUEST)
+        .send(`Not created`);
     }
-});
+  });
+
+  route.post(`/category-picture`, authenticateJwt, isAdmin, upload.single(`upload`), async (req, res) => {
+    const meta = req.body.meta;
+    const file = req.file;
+    const categoryId = JSON.parse(meta).category_id
+
+    const pictureData = {
+      path: file ? cutPath(file.path, `/img`) : ``,
+      category_id: categoryId
+    };
+    // console.log(pictureData)
+    try {
+      const picture = await pictureService.createCategoryPicture(pictureData);
+      return res.status(HttpCode.CREATED)
+        .json(picture);
+
+    } catch (err) {
+      console.log(err)
+      return res.status(HttpCode.BAD_REQUEST)
+        .send(`Not created`);
+    }
+  });
 };

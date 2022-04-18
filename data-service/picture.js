@@ -4,10 +4,17 @@ class PictureService {
   constructor(sequelize) {
     this._Project = sequelize.models.Project;
     this._Picture = sequelize.models.Picture;
+    this._CategoryImage = sequelize.models.CategoryImage;
+
   }
 
   async create(pictureData) {
     let picture = await this._Picture.create(pictureData);
+    return picture.get();
+  }
+
+  async createCategoryPicture(pictureData) {
+    let picture = await this._CategoryImage.create(pictureData);
     return picture.get();
   }
 
