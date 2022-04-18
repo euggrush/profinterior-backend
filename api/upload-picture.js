@@ -12,10 +12,19 @@ const {
   HttpCode
 } = require(`../constants`);
 
+const upload = require(`../middlewares/upload`);
+const authenticateJwt = require(`../middlewares/authenticate-jwt`);
+const isAdmin = require(`../middlewares/admin-only`);
+
+const cutPath = (arg1, arg2) => {
+    const path = arg1.substring(arg1.indexOf(arg2));
+    return path;
+};
+
 
 module.exports = (app, pictureService) => {
 
-  app.use(`/upload/img`, route);
+  app.use(`/upload`, route);
 
   route.use(cors({
     origin: true
@@ -33,7 +42,7 @@ module.exports = (app, pictureService) => {
     res.end();
   });
 
-  route.get(`/:pictureName`, async (req, res) => {
+  route.get(`/img/:pictureName`, async (req, res) => {
     const {
       pictureName
     } = req.params;
@@ -42,4 +51,25 @@ module.exports = (app, pictureService) => {
     const directoryPath = path.join(__dirname, '../upload/img');
     res.sendFile(`${directoryPath}/${pictureName}`);
   });
+
+  route.post(`/`, authenticateJwt, isAdmin, upload.single(`upload`), async (req, res) => {
+    const meta = req.body.meta;
+    const file = req.file;
+    const projectId = JSON.parse(meta).project_id
+
+    const pictureData = {
+        path: file ? cutPath(file.path, `/img`) : ``,
+        project_id: projectId
+    };
+    try {
+        const picture = await pictureService.create(pictureData);
+        return res.status(HttpCode.CREATED)
+            .json(picture);
+
+    } catch (err) {
+        console.log(err)
+        return res.status(HttpCode.BAD_REQUEST)
+            .send(`Not created`);
+    }
+});
 };
