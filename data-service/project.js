@@ -46,18 +46,25 @@ class ProjectService {
   }
 
   async findOne(projectId) {
-    const include = [];
-    include.push(Aliase.CATEGORIES, Aliase.PHOTOS);
+    const include = [
+      Aliase.CATEGORIES,
+      Aliase.PHOTOS,
+    ];
     return await this._Project.findByPk(projectId, {
       include
     });
   }
 
   async findPage(searchText) {
+    const include = [
+      Aliase.CATEGORIES,
+      Aliase.PHOTOS,
+    ];
     const projects = await this._Project.findAll({
       where: {
         category_id: searchText.category_id
-      }
+      },
+      include
     });
     return projects;
   }
