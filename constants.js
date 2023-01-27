@@ -1,5 +1,5 @@
 'use strict';
-const DEFAULT_PORT = 8000;
+const DEFAULT_PORT = 3020;
 const DEFAULT_COMMAND = `--server`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
