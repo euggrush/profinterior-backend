@@ -67,6 +67,6 @@ module.exports = (app, service) => {
     }
 
     return res.status(HttpCode.OK)
-      .json(category);
+      .json(`Deleted!`);
   });
 };

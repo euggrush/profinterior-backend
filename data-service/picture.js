@@ -13,13 +13,22 @@ class PictureService {
     return picture.get();
   }
 
+// CREATE CATEGORY IMAGE
+
   async createCategoryPicture(pictureData) {
     await this._CategoryImage.destroy({
-      where: {}
+      where: {
+        category_id: pictureData.category_id
+      }
+    }).catch((err) => {
+      console.log(err)
     });
+
     let picture = await this._CategoryImage.create(pictureData);
     return picture.get();
   }
+
+// DELETE PROJECT IMAGE
 
   async drop(pictureId) {
     const deletedRows = await this._Picture.destroy({
@@ -30,9 +39,13 @@ class PictureService {
     return !!deletedRows;
   }
 
+// FIND ALL PROJECT IMAGES
+
   async findAll() {
     return await this._Picture.findAll();
   }
+
+// FIND PROJECT IMAGES OR IMAGES BY PROJECT
 
   async findOne(projectId, pictureId) {
 
