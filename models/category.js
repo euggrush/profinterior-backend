@@ -29,7 +29,7 @@ const defineRelations = ({
         as: Aliase.PROJECTS,
         foreignKey: `category_id`
     });
-    Category.hasOne(CategoryImage, {
+    Category.hasMany(CategoryImage, {
         as: Aliase.CATEGORY_IMAGES,
         foreignKey: `category_id`
     });

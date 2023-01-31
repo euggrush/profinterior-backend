@@ -14,6 +14,9 @@ class PictureService {
   }
 
   async createCategoryPicture(pictureData) {
+    await this._CategoryImage.destroy({
+      where: {}
+    });
     let picture = await this._CategoryImage.create(pictureData);
     return picture.get();
   }
