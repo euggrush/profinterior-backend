@@ -54,10 +54,8 @@ class PictureService {
         }
       })
     }
-
     return projectPictures;
   }
-
 }
 
 module.exports = PictureService;

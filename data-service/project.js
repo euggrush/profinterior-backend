@@ -20,6 +20,12 @@ class ProjectService {
   }
 
   async drop(id) {
+    await this._Picture.destroy({
+      where: {
+        project_id: id
+      }
+    });
+
     const deletedRow = await this._Project.destroy({
       where: {
         id
