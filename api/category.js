@@ -69,4 +69,20 @@ module.exports = (app, service) => {
     return res.status(HttpCode.OK)
       .json(`Deleted!`);
   });
+
+  // MODIFY CATEGORY
+  route.put(`/:categoryId`, authenticateJwt, isAdmin, (req, res) => {
+    const {
+      categoryId
+    } = req.params;
+
+    const updated = service.update(categoryId, req.body);
+
+    if (!updated) {
+      return res.status(HttpCode.NOT_FOUND)
+        .send(`Not found with ${categoryId}`);
+    }
+    return res.status(HttpCode.OK)
+      .send(`${updated} Updated!`);
+  });
 };

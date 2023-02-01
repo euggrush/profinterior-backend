@@ -51,7 +51,7 @@ class CategoryService {
     }).catch((err) => {
       console.log(err)
     });
-    
+
     return `Deleted!`
   }
 
@@ -71,6 +71,20 @@ class CategoryService {
 
   async findOne(categoryId) {
     return this._Category.findByPk(categoryId);
+  }
+
+  // MODIFY CATEGORY
+
+  async update(categoryId, categoryBody) {
+    await this._Category.update({
+      name: categoryBody.name,
+    }, {
+      where: {
+        id: categoryId
+      },
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 }
 
