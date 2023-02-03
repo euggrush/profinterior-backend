@@ -7,6 +7,8 @@ const ExitCode = {
     error: 1
 };
 
+const PRE_AUTH_REQUEST_URL = `https://objectstorage.ca-toronto-1.oraclecloud.com/p/jE02KCLipZSKqdPxfle5ABFxoo3kkhQaCZySIYDoeGA5vq21F6brBA1inVn0dds4/n/yzfveo9zjrvn/b/bucket-20230109-1321/o/`;
+
 const HttpCode = {
     OK: 200,
     CREATED: 201,
@@ -25,7 +27,8 @@ module.exports = {
     ExitCode,
     DEFAULT_PORT,
     HttpCode,
-    API_PREFIX
+    API_PREFIX,
+    PRE_AUTH_REQUEST_URL
 };
 
 module.exports.Env = {

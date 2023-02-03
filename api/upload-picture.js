@@ -12,7 +12,15 @@ const {
   HttpCode
 } = require(`../constants`);
 
-const upload = require(`../middlewares/upload`);
+const multer = require("multer");
+
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage
+});
+
+// const upload = require(`../middlewares/upload`);
+const uploadToOracle = require(`../middlewares/upload-bucket`);
 const authenticateJwt = require(`../middlewares/authenticate-jwt`);
 const isAdmin = require(`../middlewares/admin-only`);
 
@@ -20,7 +28,6 @@ const cutPath = (arg1, arg2) => {
   const path = arg1.substring(arg1.indexOf(arg2));
   return path;
 };
-
 
 module.exports = (app, pictureService) => {
 
@@ -52,7 +59,9 @@ module.exports = (app, pictureService) => {
     res.sendFile(`${directoryPath}/${pictureName}`);
   });
 
-  route.post(`/`, authenticateJwt, isAdmin, upload.single(`upload`), async (req, res) => {
+  // UPLOAD PROJECT PICTURE
+
+  route.post(`/`, authenticateJwt, isAdmin, upload.single(`upload`), uploadToOracle, async (req, res) => {
     const meta = req.body.meta;
     const file = req.file;
     const projectId = JSON.parse(meta).project_id
@@ -61,6 +70,7 @@ module.exports = (app, pictureService) => {
       path: file ? cutPath(file.path, `/img`) : ``,
       project_id: projectId
     };
+
     try {
       const picture = await pictureService.create(pictureData);
       return res.status(HttpCode.CREATED)
@@ -73,16 +83,19 @@ module.exports = (app, pictureService) => {
     }
   });
 
-  route.post(`/category-picture`, authenticateJwt, isAdmin, upload.single(`upload`), async (req, res) => {
+  // UPLOAD CATEGORY PICTURE
+
+  route.post(`/category-picture`, authenticateJwt, isAdmin, upload.single("upload"), uploadToOracle, async (req, res) => {
+
     const meta = req.body.meta;
-    const file = req.file;
-    const categoryId = JSON.parse(meta).category_id
+    const file = req.fileInfo.filename;
+    const categoryId = JSON.parse(meta).category_id;
 
     const pictureData = {
-      path: file ? cutPath(file.path, `/img`) : ``,
+      path: file ? cutPath(file, `/img`) : ``,
       category_id: categoryId
     };
-    // console.log(pictureData)
+
     try {
       const picture = await pictureService.createCategoryPicture(pictureData);
       return res.status(HttpCode.CREATED)
