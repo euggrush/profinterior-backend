@@ -63,11 +63,11 @@ module.exports = (app, pictureService) => {
 
   route.post(`/`, authenticateJwt, isAdmin, upload.single(`upload`), uploadToOracle, async (req, res) => {
     const meta = req.body.meta;
-    const file = req.file;
+    const file = req.fileInfo.filename;
     const projectId = JSON.parse(meta).project_id
 
     const pictureData = {
-      path: file ? cutPath(file.path, `/img`) : ``,
+      path: file ? cutPath(file, `/img`) : ``,
       project_id: projectId
     };
 
