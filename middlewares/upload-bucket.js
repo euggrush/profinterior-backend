@@ -2,13 +2,15 @@
 
 const axios = require("axios");
 
+require(`dotenv`).config();
+
 const {
   nanoid
 } = require(`nanoid`);
 
 const {
-  PRE_AUTH_REQUEST_URL
-} = require(`../constants`);
+  UPLOAD_PRE_AUTH_REQUEST_URL
+} = process.env;
 
 let fileNewName = ``;
 
@@ -49,7 +51,7 @@ const getPresignedUrl = async (filename) => {
   const uniqueName = nanoid(10);
   const extension = filename.split(`.`).pop();
   fileNewName = `${uniqueName}.${extension}`;
-  return `${PRE_AUTH_REQUEST_URL}img/${fileNewName}`;
+  return `${UPLOAD_PRE_AUTH_REQUEST_URL}img/${fileNewName}`;
 
   // Replace this with code to generate a Pre-Authenticated Request URL for uploading the file to Oracle Cloud Infrastructure Object Storage
 };
