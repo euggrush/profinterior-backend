@@ -43,7 +43,8 @@ class ProjectService {
     const projects = await this._Project.findAll({
       include,
       order: [
-        [`created_at`, `DESC`]
+        [`created_at`, `DESC`],
+        [Aliase.PHOTOS, `created_at`, `DESC`]
       ]
     });
 

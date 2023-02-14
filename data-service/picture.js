@@ -44,14 +44,22 @@ class PictureService {
   // FIND ALL PROJECT PICTURES
 
   async findAll() {
-    return await this._Picture.findAll();
+    return await this._Picture.findAll({
+      order: [
+        [`created_at`, `DESC`]
+      ]
+    });
   }
 
   // FIND PROJECT PICTURES OR PICTURES BY PROJECT
 
   async findOne(projectId, pictureId) {
 
-    const pictures = await this._Picture.findAll();
+    const pictures = await this._Picture.findAll({
+      order: [
+        [`created_at`, `DESC`]
+      ]
+    });
 
     let projectPictures = [];
     if (!pictureId) {

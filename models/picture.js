@@ -14,7 +14,7 @@ const define = (sequelize) => Picture.init({
         allowNull: false
     }
 }, {
-    createdAt: false,
+    createdAt: `created_at`,
     updatedAt: false,
     sequelize,
     modelName: `Picture`,
