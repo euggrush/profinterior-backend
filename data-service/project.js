@@ -71,7 +71,11 @@ class ProjectService {
       where: {
         category_id: searchText.category_id
       },
-      include
+      include,
+      order: [
+        [`created_at`, `DESC`],
+        [Aliase.PHOTOS, `created_at`, `DESC`]
+      ]
     });
     return projects;
   }
